@@ -16,23 +16,27 @@ driver = webdriver.Chrome(
     options=options
 )
 #  Открываем вебдрайвером ссылку
-driver.get('https://app.imyx.ru/auth?redirect=/&utm_source=yandex&utm_medium=cpc&utm_campaign=ya_adult_maxcash&utm_content=1907242160146401260&utm_term=---autotargeting')
+driver.get('https://saucedemo.com/')
 #  Устанавливаем размер окна
 driver.set_window_size(1920,1080)
 
-#  Находим элемент для логина, используя XPATH
-user_name = driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/div[1]/input")
-user_name.send_keys("not_office@mail.ru")  #  Вводим в поле "not_office@mail.ru"
+#  Находим элемент для логина, используя XPATH, и Вводим в поле логин "standard_user_"
+driver.find_element(By.XPATH, "//input[@id='user-name']").send_keys("standard_user_")
+print('Incorrect login input')
 
-#  Находим элемент для пароля, используя XPATH
-user_password = driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/div[2]/div/input")
-user_password.send_keys("Shur_1234")  #  Вводим в поле "Shur_1234"
+#  Находим элемент для пароля, используя XPATH, и Вводим в поле пароль "secret_sauce_"
+driver.find_element(By.XPATH, "//input[@id='password']").send_keys("secret_sauce_")
+print('Incorrect password input')
 
 #  Найдём и нажмём кнопку входа
-button_for_login = driver.find_element(By.XPATH, "/html/body/div[1]/div/main/div/div/form/button")
-button_for_login.click()
+driver.find_element(By.XPATH, "//input[@id='login-button']").click()
+print('Login button click')
 
-# Пауза для визуальной проверки
-time.sleep(10)
-# Закрываем браузер
+#  Паузы для визуальной проверки
+time.sleep(3)
+driver.refresh()  #  обновляем страницу
+print("Page refresh")
+time.sleep(2)
+
+#  Закрываем браузер
 driver.close()
